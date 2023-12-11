@@ -63,7 +63,6 @@
     "forwarded": "^0.2.0",
     "fresh": "^0.5.2",
     "fs-extra": "^8.1.0",
-    "fsevents": "^2.3.2",
     "function-bind": "^1.1.1",
     "generate-function": "^2.3.1",
     "get-intrinsic": "^1.2.1",
