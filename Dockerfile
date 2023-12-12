@@ -1,3 +1,4 @@
+// node 이미지
 FROM node
 
 WORKDIR /usr/src/app
