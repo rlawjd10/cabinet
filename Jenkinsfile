@@ -31,8 +31,10 @@ pipeline {
                             sh "docker push cabinet:${imageTag}"
 
                             // latest 태그로도 푸쉬
-                            sh "docker tag cabinet:latest cabinet:latest"
-                            sh "docker push cabinet:latest"
+                            sh "docker tag cabinet:latest jaeae/cabinet:${imageTag}"
+
+                            sh "docker push jaeae/cabinet:${imageTag}"
+
                         }
                 }
             }
