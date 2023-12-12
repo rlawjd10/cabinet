@@ -24,7 +24,7 @@ pipeline {
             steps {
                 script {
                         docker.withRegistry('http://registry.hub.docker.com', 'jaeae') {
-                            sh "docker tag cabinet:latest jaeae/cabinet:latest"
+                           // sh "docker tag cabinet:latest jaeae/cabinet:latest"
                             sh "docker push jaeae/cabinet:latest"
                         }
                     
