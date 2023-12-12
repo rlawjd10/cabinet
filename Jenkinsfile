@@ -11,9 +11,6 @@ pipeline {
         stage('Build and Run Docker Image') {
             steps {
                 script {
-                    // 기존 컨테이너 제거
-                    sh 'docker rm -f cabinet || true'
-
                     // Docker 이미지 빌드
                     sh 'docker build -t cabinet:latest -f Dockerfile .'
 
@@ -26,18 +23,19 @@ pipeline {
         stage('Tag and Push to Hub') {
             steps {
                 echo "Tagging and pushing to hub.................."
-                script {
-                    withCredentials([string(credentialsId: 'docker_pwd', variable: 'docker_hub_pwd')]) {
-                        def imageTag = "latest:${BUILD_NUMBER}"
-                        
-                        // Hub에 로그인
-                        sh "docker login -u jaeae -p dmswo54899!"
-                        
-                        // 이미지를 허브로 푸쉬
-                        sh "docker tag cabinet:latest ${imageTag}"
-                        sh "docker push ${imageTag}"
-                    }
-                }   
+
+                // 이미지 태그 정의
+                def imageTag = "${env.BUILD_NUMBER}"
+
+                docker.withRegistry('https://registry.hub.docker.com', 'jaeae') {
+                    // 이미지를 허브로 푸쉬
+                    sh "docker tag cabinet:latest cabinet:${imageTag}"
+                    sh "docker push cabinet:${imageTag}"
+
+                    // latest 태그로도 푸쉬
+                    sh "docker tag cabinet:latest cabinet:latest"
+                    sh "docker push cabinet:latest"
+                }
             }
         }
     }
