@@ -23,8 +23,7 @@ pipeline {
         stage('Push image') {
             steps {
                 script {
-                    withCredentials([string(credentialsId: 'jaeae', variable: 'docker_hub_pwd')]) {
-                        def imageTag = "${env.BUILD_NUMBER}"
+                    def imageTag = "${env.BUILD_NUMBER}"
 
                         docker.withRegistry('https://registry.hub.docker.com', 'jaeae') {
                             // 이미지를 허브로 푸쉬
@@ -35,7 +34,6 @@ pipeline {
                             sh "docker tag cabinet:latest cabinet:latest"
                             sh "docker push cabinet:latest"
                         }
-                    }
                 }
             }
         }
