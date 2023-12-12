@@ -23,9 +23,9 @@ pipeline {
         stage('Push image to Docker Hub') {
             steps {
                 script {
-                        docker.withRegistry('http://registry.hub.docker.com', 'jaeae') {
-                            sh "docker push jaeae/cabinet"
+                        docker.withRegistry('https://index.docker.io/v1/', 'jaeae') {
                             sh "docker tag cabinet:latest jaeae/cabinet"
+                            sh "docker push jaeae/cabinet"
                         }
                     
                 }
