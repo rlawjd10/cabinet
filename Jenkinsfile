@@ -25,7 +25,7 @@ pipeline {
                 script {
                     def imageTag = "${env.BUILD_NUMBER}"
 
-                    withCredentials([string(credentialsId: 'jaeae4', variable: 'DOCKER_CREDENTIALS')]) {
+                    withCredentials([string(credentialsId: 'jaeae', variable: 'DOCKER_CREDENTIALS')]) {
                         docker.withRegistry('https://index.docker.io/v1/', 'jaeae') {
                             sh "echo \${DOCKER_CREDENTIALS} | docker login --username jaeae --password-stdin"
                             sh "docker tag cabinet:latest jaeae/cabinet:${imageTag}"
