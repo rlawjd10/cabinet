@@ -26,7 +26,7 @@ pipeline {
                     def imageTag = "${env.BUILD_NUMBER}"
 
                     withCredentials([string(credentialsId: 'jaeae3', variable: 'DOCKER_CREDENTIALS')]) {
-                        docker.withRegistry('https://registry.hub.docker.com', 'jaeae3') {
+                        docker.withRegistry('https://registry.hub.docker.com', 'jaeae') {
                             // latest 태그로도 푸쉬
                             sh "docker tag cabinet:latest jaeae/cabinet:${imageTag}"
                             sh "docker push jaeae/cabinet:${imageTag}"
