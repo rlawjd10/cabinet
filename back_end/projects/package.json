@@ -188,7 +188,8 @@
     "start" : "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "NODE_ENV=development node index.js",
-    "prod": "NODE_ENV=production node index.js"
+    "prod": "NODE_ENV=production node index.js",
+    "build": "echo 'No build steps needed'"
   },
   "repository": {
     "type": "git",
