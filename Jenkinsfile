@@ -20,18 +20,15 @@ pipeline {
             }
         }
 
-        stage('Push image') {
+        stage('Push image to Docker Hub') {
             steps {
                 script {
                     def imageTag = "${env.BUILD_NUMBER}"
-
-                    withCredentials([string(credentialsId: 'jaeae', variable: 'DOCKER_CREDENTIALS')]) {
-                        docker.withRegistry('https://index.docker.io/v1/', 'jaeae') {
-                            sh "echo \${DOCKER_CREDENTIALS} | docker login --username jaeae --password-stdin"
+                        docker.withRegistry('http://registry.hub.docker.com', 'jaeae') {
                             sh "docker tag cabinet:latest jaeae/cabinet:${imageTag}"
                             sh "docker push jaeae/cabinet:${imageTag}"
                         }
-                    }
+                    
                 }
             }
         }
