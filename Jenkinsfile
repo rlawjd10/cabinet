@@ -1,7 +1,8 @@
 node {
     def app
+    # clone
     stage('Clone repository') {
-        git 'https://github.com/EunjaeJo/cabinet.git'
+        git clone 'https://github.com/EunjaeJo/cabinet.git'
         }
     stage('Build image') {
         app = docker.build("jaeae/cabinet")
