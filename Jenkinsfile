@@ -27,14 +27,17 @@ pipeline {
                 // 이미지 태그 정의
                 def imageTag = "${env.BUILD_NUMBER}"
 
-                docker.withRegistry('https://registry.hub.docker.com', 'jaeae') {
-                    // 이미지를 허브로 푸쉬
-                    sh "docker tag cabinet:latest cabinet:${imageTag}"
-                    sh "docker push cabinet:${imageTag}"
+                script {
+                    // Docker Hub에 로그인하고 이미지를 푸쉬하는 부분을 script 블록 내에 넣습니다.
+                    docker.withRegistry('https://registry.hub.docker.com', 'jaeae') {
+                        // 이미지를 허브로 푸쉬
+                        sh "docker tag cabinet:latest cabinet:${imageTag}"
+                        sh "docker push cabinet:${imageTag}"
 
-                    // latest 태그로도 푸쉬
-                    sh "docker tag cabinet:latest cabinet:latest"
-                    sh "docker push cabinet:latest"
+                        // latest 태그로도 푸쉬
+                        sh "docker tag cabinet:latest cabinet:latest"
+                        sh "docker push cabinet:latest"
+                    }
                 }
             }
         }
