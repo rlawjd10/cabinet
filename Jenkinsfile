@@ -11,6 +11,9 @@ pipeline {
         stage('Build and Run Docker Image') {
             steps {
                 script {
+                    // 기존 컨테이너 제거
+                    sh 'docker rm -f cabinet || true'
+                    
                     // Docker 이미지 빌드
                     sh 'docker build -t cabinet:latest -f Dockerfile .'
 
