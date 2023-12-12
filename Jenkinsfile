@@ -28,7 +28,7 @@ pipeline {
                         def imageTag = "latest:${BUILD_NUMBER}"
                         
                         // Hub에 로그인
-                        sh "docker login -u 'jaeae' -p ${docker_hub_pwd}"
+                        sh "docker login -u jaeae -p ${docker_hub_pwd}"
                         
                         // 이미지를 허브로 푸쉬
                         sh "docker tag cabinet:latest ${imageTag}"
