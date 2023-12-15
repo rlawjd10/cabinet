@@ -6,28 +6,25 @@ pipeline {
         LOCATION = 'asia-northeast3-a'
         CREDENTIALS_ID = 'gke_opensource-398703_asia-northeast3-a_k8s'
     }
-
     stages {
-        stage('clone') {
+        stage("Checkout code") {
             steps {
-                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/rlawjd10/cabinet.git']])
+                checkout scm
             }
         }
-
         stage('Build Image') {
             steps {
                 script {
-                    // Docker 이미지 빌드
-                    sh 'docker build -t jekim12/cabinet:latest -f Dockerfile .'
+                    myapp = docker.build("jekim12/cabinet:${env.BUILD_ID}")
                 }
             }
         }
-
         stage('Push image to Docker Hub') {
             steps {
                 script {
                         docker.withRegistry('https://index.docker.io/v1/', 'jekim12') {
-                            sh "docker push jekim12/cabinet"
+                            myapp.push("latest")
+                            myapp.push("${env.BUILD_ID}")
                         }
                     
                 }
@@ -38,10 +35,14 @@ pipeline {
                 branch 'master'
             }
             steps {
-                sh "sed -i 's/cabinet:latest/hello:${env.BUILD_ID}/g' deployment.yaml"
-step([$class: 'KubernetesEngineBuilder', projectId: env.PROJECT_ID, clusterName: env.CLUSTER_NAME, 
-location: env.LOCATION, manifestPattern: 'deployment.yaml', credentialsId: env.CREDENTIALS_ID, 
-verifyDeployments: false])
+                sh "sed -i 's/cabinet:latest/cabinet:${env.BUILD_ID}/g' deployment.yaml"
+                step([$class: 'KubernetesEngineBuilder', 
+                      projectId: env.PROJECT_ID, 
+                      clusterName: env.CLUSTER_NAME, 
+                      location: env.LOCATION, 
+                      manifestPattern: 'deployment.yaml', 
+                      credentialsId: env.CREDENTIALS_ID, 
+                      verifyDeployments: false])
             }
         } 
     }
