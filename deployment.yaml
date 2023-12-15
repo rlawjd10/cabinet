@@ -1,3 +1,8 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cabinet-deploy
+spec:
   replicas: 3
   strategy:
     type: Recreate
@@ -8,7 +13,7 @@
     metadata:
       labels:
         app: cabinet
-        tier: cabinet
+        tier: cabinet 
     spec:
       containers:
       - name: cabinet-container
@@ -26,11 +31,11 @@ metadata:
   name: cabinet-service
   labels:
     app: cabinet
-spec:
+spec:           
   ports:
   - port: 80
-    targetPort: 3000
-  selector:
+    targetPort: 3000     
+  selector:           
     app: cabinet
     tier: cabinet
   type: LoadBalancer
