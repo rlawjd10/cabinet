@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: cabinet-container
-        image: jaeae/cabinet:latest
+        image: jekim12/cabinet:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 3000
