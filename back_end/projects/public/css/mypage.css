@@ -15,7 +15,7 @@ body {
 .sidebar {
   width: 350px;
   height: 100%;
-  background-color: rgba(177, 178, 255, 0.73);
+  background-color: red;
   border-radius: 35px;
   position: absolute;
   left: 0;
