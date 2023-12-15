@@ -1,0 +1,36 @@
+  replicas: 3
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: cabinet
+  template:
+    metadata:
+      labels:
+        app: cabinet
+        tier: cabinet
+    spec:
+      containers:
+      - name: cabinet-container
+        image: jaeae/cabinet:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+          name: cabinet
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: cabinet-service
+  labels:
+    app: cabinet
+spec:
+  ports:
+  - port: 80
+    targetPort: 3000
+  selector:
+    app: cabinet
+    tier: cabinet
+  type: LoadBalancer
