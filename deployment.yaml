@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+        name: cabinet
+        labels:
+                app:cabinet
+spec:
+        replicas: 3
+        strategy:
+                type: Recreate
+        selector:
+                matchLabels:
+                        app: cabinet
+template:
+        metadata:
+                labels:
+                        app: cabinet
+                        tier: cabinet
+                speck:
+                        containers:
+                                name: cabinet
+                                image: jekim12/cabinet:latest
+                                imagePullPolicy: Always
+                                ports:
+                                        containerPort: 3000
+                                        name: cabinet
+---
+apiVersion: v1
+kind: Service
+metadata:
+        name: cabinet
+        labels:
+                app: cabinet
+        spec:
+                ports:
+                        port: 80
+                        targetPort: 3000
+                selector:
+                        app: cabinet
+                        tier: cabinet
+                type: LoadBalancer
+
+
