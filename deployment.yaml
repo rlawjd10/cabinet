@@ -16,7 +16,7 @@ template:
                 labels:
                         app: cabinet
                         tier: cabinet
-                speck:
+                spec:
                         containers:
                                 name: cabinet
                                 image: jekim12/cabinet:latest
