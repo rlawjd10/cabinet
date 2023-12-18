@@ -141,56 +141,15 @@
                             <li><input type="date" value="2030-12-30" class="datebox" style="cursor: pointer;"></li>
                             <li><div class="line"></div></li>
                             <li>
-                                <form action="/app/attendance" method="post">
-                                    <div class="attendance_txt manager_att">
-                                      <input
-                                        type="checkbox"
-                                        class="attndCheckbox"
-                                        name="attendanceCheckbox"
-                                        value="1" />
-                                      <label  class="manager_att_name" for="userName">조은재</label>
+                                <div class="attendance_txt manager_att">
+                                    <div name="checkbox" value="1" class="checkBox checked">
+                                        <span class="material-icons checkIcon">
+                                            done
+                                        </span>
                                     </div>
-                                  </form>
-                                  <form>
-                                    <div class="attendance_txt manager_att">
-                                      <input
-                                        type="checkbox"
-                                        class="attndCheckbox"
-                                        name="attendanceCheckbox"
-                                        value="2" />
-                                      <label  class="manager_att_name" for="userName">이지원</label>
-                                    </div>
-                                  </form>
-                                  <form>
-                                    <div class="attendance_txt manager_att">
-                                      <input
-                                        type="checkbox"
-                                        class="attndCheckbox"
-                                        name="attendanceCheckbox"
-                                        value="3" />
-                                      <label  class="manager_att_name" for="userName">김준희</label>
-                                    </div>
-                                  </form>
-                                  <form>
-                                    <div class="attendance_txt manager_att">
-                                      <input
-                                        type="checkbox"
-                                        class="attndCheckbox"
-                                        name="attendanceCheckbox"
-                                        value="4" />
-                                      <label  class="manager_att_name" for="userName">서가은</label>
-                                    </div>
-                                  </form>
-                                  <form>
-                                    <div class="attendance_txt manager_att">
-                                      <input
-                                        type="checkbox"
-                                        class="attndCheckbox"
-                                        name="attendanceCheckbox"
-                                        value="5" />
-                                      <label  class="manager_att_name" for="userName">김수연</label>
-                                    </div>
-                                  </form>
+                                    <div class="checkBox unchecked"></div>
+                                    <div class="manager_att_name">조은재</div>
+                                </div>
                                 <% result.forEach((el, index) => {%>
                                 <div class="attendance_txt member_att" style="display: none">
                                         <div class="attend_name"><%= el.nickname %></div>
@@ -199,9 +158,69 @@
                                 </div>
                                 <% }) %>
                             </li>
+                            <li>
+                                <div class="attendance_txt manager_att">
+                                    <div name="checkbox" value="2" class="checkBox checked">
+                                        <span class="material-icons checkIcon">
+                                            done
+                                        </span>
+                                    </div>
+                                    <div class="checkBox unchecked"></div>
+                                    <div class="manager_att_name">이지원</div>
+                                </div>
+                                
+                            </li>
+                            <li>
+                                <div class="attendance_txt manager_att">
+                                    <div name="checkbox" value="3" class="checkBox checked">
+                                        <span class="material-icons checkIcon">
+                                            done
+                                        </span>
+                                    </div>
+                                    <div class="checkBox unchecked"></div>
+                                    <div class="manager_att_name">김준희</div>
+                                </div>
+                                <!-- <div class="attendance_txt member_att" style="display: none">
+                                    <div class="attend_name">김준희</div>
+                                    <div class="attend_timestamp">14:32:47</div>
+                                    <div class="attend_state">출석</div>
+                                </div> -->
+                            </li>
+                            <li>
+                                <div class="attendance_txt manager_att">
+                                    <div name="checkbox" value="4" class="checkBox checked">
+                                        <span class="material-icons checkIcon">
+                                            done
+                                        </span>
+                                    </div>
+                                    <div class="checkBox unchecked"></div>
+                                    <div class="manager_att_name">서가은</div>
+                                </div>
+                                <!-- <div class="attendance_txt member_att" style="display: none">
+                                    <div class="attend_name">서가은</div>
+                                    <div class="attend_timestamp">14:32:47</div>
+                                    <div class="attend_state">출석</div>
+                                </div> -->
+                            </li>
+                            <li>
+                                <div class="attendance_txt manager_att">
+                                    <div name="checkbox" value="5" class="checkBox checked">
+                                        <span class="material-icons checkIcon">
+                                            done
+                                        </span>
+                                    </div>
+                                    <div class="checkBox unchecked"></div>
+                                    <div class="manager_att_name">김수연</div>
+                                </div>
+                                <!-- <div class="attendance_txt member_att" style="display: none">
+                                    <div class="attend_name">김수연</div>
+                                    <div class="attend_timestamp">00:00:00</div>
+                                    <div class="attend_state" style="color: #9BBE5A;">결석</div>
+                                </div> -->
+                            </li>
                             <div class="saveAtt">
-                                <button id="cancelBtn">취소</button>
-                                <button id ="saveBtn">저장</button>
+                                <span id="cancelBtn">취소</span>
+                                <span id ="saveBtn">저장</span>
                             </div>
                         </ul>
                     </div>

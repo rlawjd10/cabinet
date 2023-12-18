@@ -30,16 +30,18 @@ exports.getAttendance = async function (req, res) {
  * API Name : 출석 정보 저장 API
  * [POST] /app/members/:groupId/attendance/:scheduleId
  */
-exports.updateAttendance = async function (req, res) {
-  const { userIds, status } = req.body;
-  try {
-    for (const userId of userIds) {
-      await attendService.updateAttendance(userId, status);
-    }
-    return res.status(200).json({ success: true });
-  } catch (error) {
-    console.error('업데이트 오류:', error);
-    return res.status(500).json({ success: false, error: '업데이트 실패' });
-  }
-};
+exports.postAttendance = async function (req, res) {
 
+    
+    const { userIds } = req.body;
+    const status = '하이'; // 출석 정보 상태
+
+    // 선택된 사용자의 출석 정보 업데이트
+    for (const userId of userIds) {
+      const attendResponse = await attendService.editAttendance(userId, 1, 1, status);
+      return res.send(attendResponse);
+    }
+
+    
+
+};

@@ -11,24 +11,16 @@ async function selectAttend(connection, groupId, scheduleId) {
 }
 
 // 출결 정보 저장
-async function updateAttendance (userId, status) {
-  try {
-    const updateAttendanceQuery = `
-      UPDATE Attendance
-      SET attendStatus = ?
-      WHERE userId = ?;
-                `;
-    
-    const updateAttendanceParams = [status, userId];
+async function updateAttendance(connection, updateAttendanceParams) {
+  const updateAttendanceQuery = `
+  UPDATE Attendance
+  SET attendanceStatus = ?
+  WHERE userId = ? AND groupId = ? AND scheduleId = ?;
+`;
 
-    const updateResult = await connection.query(updateAttendanceQuery, updateAttendanceParams);
-    return updateResult;
-  } catch (error) {
-    console.error('DB 업데이트 오류:', error);
-    throw error;
-  }
-};
-
+  const updateAttendanceRow = await connection.query(updateAttendanceQuery, updateAttendanceParams);
+  return updateAttendanceRow;
+}
 
 module.exports = {
   selectAttend,
