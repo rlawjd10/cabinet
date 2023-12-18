@@ -403,6 +403,18 @@ z-index: 1;
 line-height: 35px;
 }
 
+input[type="checkbox"] {
+z-index: 5;
+width: 18px;
+height: 18px;
+border-radius: 5px;
+left: 15%;
+position: absolute;
+border: 3px solid #808080;
+cursor: pointer;
+top: 20%;
+}
+
 .checkBox {
 z-index: 5;
 width: 18px;

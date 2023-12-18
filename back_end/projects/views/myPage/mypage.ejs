@@ -91,7 +91,8 @@
         <!-- Profile Info Box -->
         <span class="contentBox">
           <span class="profileImg">
-            <img src="/img/profile_img.jpg" alt="프로필사진">
+            <div><img src="back_end\projects\public\img\profile_img_jaeae_rectangle.jpg" alt="프로필사진"></div>
+            
             <!-- 데베에서 프로필 사진 어케 가져오지 -->
           </span>
           <% name.forEach((el, index) => {%>
@@ -101,11 +102,12 @@
           <span class="editBtn">편집</span>
           <span class="divideLine"></span>
           <ul class="cnt1">
-              <% cntPost.forEach((el, index) => {%>
+            <li class="cntPost">3</li>
+              <!-- <% cntPost.forEach((el, index) => {%>
                 <li class="cntPost"><%= el %></li>
-              <% }) %>
-            <li class="cntComment"><%= JSON.stringify(cntComment) %></li>
-            <li class="cntLike"><%= JSON.stringify(cntLike) %></li>
+              <% }) %> -->
+            <li class="cntComment">29</li>
+            <li class="cntLike">16</li>
             <!-- <li class="cntScrap">4</li> -->
           </ul>
           <ul class="cnt2">

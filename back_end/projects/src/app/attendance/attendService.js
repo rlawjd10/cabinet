@@ -14,16 +14,13 @@ const {connect} = require("http2");
 // Service: Create, Update, Delete 비즈니스 로직 처리
 
 // 출석 정보 저장
-exports.editAttendance = async function (userId, groupId, scheduleId, status ) {
+exports.updateAttendance = async function (userId, status) {
     try {
-      const updateAttendanceParams = [userId, groupId, scheduleId, status];
-      const connection = await pool.getConnection(async (conn) => conn);
-      const editAttendanceResult = await attendDao.updateAttendance(connection, updateAttendanceParams);
-  
-      return response(baseResponse.SUCCESS);
-    } catch (err) {
-      logger.err(`App  - editAttendance Service error\n: ${err.message}`);
-      return errResponse(baseResponse.DB_ERROR);
+      // attendDao의 updateAttendance 함수를 호출하여 선택된 사용자의 attendStatus를 업데이트합니다.
+      await attendDao.updateAttendance(userId, status);
+    } catch (error) {
+      console.error('업데이트 오류:', error);
+      throw error;
     }
   };
   

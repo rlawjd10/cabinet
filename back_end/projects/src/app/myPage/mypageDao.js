@@ -11,13 +11,13 @@ async function selectName(connection, groupId, userId) {
 
 
 // 2. 유저별 게시글 수 조회
-async function selectPosts(connection) {
+async function selectPosts(connection, groupId, userId) {
   const selectPostsQuery = `
-  SELECT count(*)
+  SELECT postId
   FROM Post, User
-  WHERE Post.userId = User.userId;
+  WHERE Post.groupId = ? AND Post.userId = User.userId AND Post.userId = ?;
                 `;
-  const posts = await connection.query(selectPostsQuery);
+  const posts = await connection.query(selectPostsQuery, [groupId, userId]);
   return posts;
 }
 
