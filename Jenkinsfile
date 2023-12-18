@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     // Docker 레지스트리에 로그인하고 이미지를 푸시
-                    docker.withRegistry('https://registry.hub.docker.com', 'jaeae') {
+                    docker.withRegistry('https://index.docker.io/v1/', 'jaeae') {
                         myapp.push("latest")
                         myapp.push("${env.BUILD_ID}")
                     }
