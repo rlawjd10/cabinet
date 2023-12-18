@@ -1,7 +1,7 @@
 pipeline {
     agent any
     
-    # 환경 변수 정의
+    // 환경 변수 정의
     environment {
         PROJECT_ID = 'rising-daylight-382112'
         CLUSTER_NAME = 'kube'
@@ -10,28 +10,28 @@ pipeline {
     }
     
     stages {
-        # 소스 코드 체크아웃 단계
+        // 소스 코드 체크아웃 단계
         stage("Checkout code") {
             steps {
                 checkout scm
             }
         }
 
-        # Docker 이미지 빌드 단계
+        // Docker 이미지 빌드 단계
         stage("Build Image") {
             steps {
                 script {
-                    # Docker 이미지를 빌드하고 변수 'myapp'에 할당
+                    // Docker 이미지를 빌드하고 변수 'myapp'에 할당
                     myapp = docker.build("jaeae/cabinet:${env.BUILD_ID}")
                 }
             }
         }
 
-        # Docker Hub에 이미지 푸시 단계
+        // Docker Hub에 이미지 푸시 단계
         stage("Push image to Docker Hub") {
             steps {
                 script {
-                    # Docker 레지스트리에 로그인하고 이미지를 푸시
+                    // Docker 레지스트리에 로그인하고 이미지를 푸시
                     docker.withRegistry('https://hub.docker.com', 'jaeae') {
                         myapp.push("latest")
                         myapp.push("${env.BUILD_ID}")
@@ -40,17 +40,17 @@ pipeline {
             }
         }
 
-        # GKE(Google Kubernetes Engine)에 배포하는 단계
+        // GKE(Google Kubernetes Engine)에 배포하는 단계
         stage('Deploy to GKE') {
             when {
-                # 브랜치가 'master'일 때만 실행
+                // 브랜치가 'master'일 때만 실행
                 branch 'master'
             }
             steps {
-                # deployment.yaml 파일 내의 이미지 태그를 빌드 ID로 치환
+                // deployment.yaml 파일 내의 이미지 태그를 빌드 ID로 치환
                 sh "sed -i 's/cabinet:latest/cabinet:${env.BUILD_ID}/g' deployment.yaml"
                 
-                # KubernetesEngineBuilder를 사용하여 GKE에 배포
+                // KubernetesEngineBuilder를 사용하여 GKE에 배포
                 step([$class: 'KubernetesEngineBuilder', 
                       projectId: env.PROJECT_ID, 
                       clusterName: env.CLUSTER_NAME, 
