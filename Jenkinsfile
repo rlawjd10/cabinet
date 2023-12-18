@@ -22,7 +22,7 @@ pipeline {
         stage('Push image to Docker Hub') {
             steps {
                 script {
-                        docker.withRegistry('https://https://index.docker.io/v1/', 'jekim12') {
+                        docker.withRegistry('https://index.docker.io/v1/', 'jekim12') {
                             myapp.push("latest")
                             myapp.push("${env.BUILD_ID}")
                         }
