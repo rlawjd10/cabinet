@@ -6,6 +6,7 @@ pipeline {
         LOCATION = 'asia-northeast3-a'
         CREDENTIALS_ID = 'gke_opensource-398703_asia-northeast3-a_k8s'
     }
+    
     stages {
         stage("Checkout code") {
             steps {
