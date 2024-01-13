@@ -1,2 +1,2 @@
 # cabinet
-OSS 프로젝트
+OSS(Open Source SW) 프로젝트
